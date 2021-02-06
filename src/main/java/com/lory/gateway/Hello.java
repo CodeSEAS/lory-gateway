@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class hello {
-    @RequestMapping(value="/hello", method = RequestMethod.GET) //定义路由
+public class Hello {
+    @RequestMapping(value="/hello", method = RequestMethod.GET) //define the router
     public String hello() {
         return "hello SpringBoot";
     }
