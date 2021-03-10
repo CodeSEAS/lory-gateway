@@ -10,6 +10,7 @@ import java.net.URLConnection;
 
 public class GetURLContentTest {
     public static void main(String[] args) {
+        //common way of getting web info   
 //        try {
 //            URL url=new URL("https://www.javatpoint.com/java-tutorial");
 //            System.out.println("Protocol: "+url.getProtocol());// Using getProtocol() method of the URL class
