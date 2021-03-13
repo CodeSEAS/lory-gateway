@@ -12,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.quartz.SchedulerException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,7 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoinMarketAPITest {
+public class CoinMarketAPI {
     private static String apiKey = "968f4ca6-20ba-474b-8fbc-8ca9a821d5ad";
 
     public static void main(String[] args) {
@@ -37,11 +38,13 @@ public class CoinMarketAPITest {
             System.out.println("Error: cannont access content - " + e.toString());
         } catch (URISyntaxException e) {
             System.out.println("Error: Invalid URL " + e.toString());
+        } catch (SchedulerException e) {
+            e.printStackTrace();
         }
     }
 
     public static Map<String, Object> makeAPICall(String uri, List<NameValuePair> parameters)
-            throws URISyntaxException, IOException {
+            throws URISyntaxException, IOException, SchedulerException {
         String response_content = "";
 
         URIBuilder query = new URIBuilder(uri);
@@ -72,7 +75,9 @@ public class CoinMarketAPITest {
 //        JsonNode rootNode = mapper.readTree(response_content);
 //        ArrayList list = (ArrayList) map.get("data");
         if (Bitcoin_Price > 50000) {
-            QuartzTest quartzTest = new QuartzTest();
+            String messageBody = "Hi, " + System.lineSeparator() + "The Bitcoin price is: " + Bitcoin_Price;
+            EmailCronJob.body = messageBody;
+            QuartzTest.trigger();
         }
         return map;
     }

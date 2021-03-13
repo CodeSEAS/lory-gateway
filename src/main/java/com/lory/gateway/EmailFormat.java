@@ -35,7 +35,7 @@ public class EmailFormat {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("Username", "Password");
+                return new PasswordAuthentication("wmj1997happy@gmail.com", "Manmanloveszizi910.");
             }
         });
 
